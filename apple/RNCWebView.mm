@@ -492,6 +492,16 @@ Class<RCTComponentViewProtocol> RNCWebViewCls(void)
     [_view injectJavaScript:javascript];
 }
 
+- (void)createWebArchive:(nonnull NSString *)filePath {
+    // TODO: Implement createWebArchive
+    NSLog(@"createWebArchive not implemented");
+}
+
+- (void)loadWebArchive:(nonnull NSString *)filePath {
+    // TODO: Implement loadWebArchive
+    NSLog(@"loadWebArchive not implemented");
+}
+
 - (void)loadUrl:(nonnull NSString *)url {
     // android only
 }

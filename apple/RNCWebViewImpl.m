@@ -1503,6 +1503,38 @@ didFinishNavigation:(WKNavigation *)navigation
   [self evaluateJS: script thenCall: nil];
 }
 
+- (void)createWebArchive:(NSString *)filePath {
+    [self.webView createWebArchiveDataWithCompletionHandler:^(NSData *_Nonnull archiveData, NSError *_Nonnull archiveError) {
+        if (archiveError) {
+            NSLog(@"Unable to create web archive: %@", archiveError);
+            return;
+        }
+        NSError *writeError = nil;
+        // TODO: prepend filePath with "file://"
+        NSURL *fileUrl = [NSURL URLWithString:filePath];
+        BOOL success = [archiveData writeToURL:fileUrl options:0 error:&writeError];
+        if (!success) {
+            NSLog(@"Unable to write web archive file: %@", writeError);
+        }
+    }];
+}
+
+- (void)loadWebArchive:(NSString *)filePath {
+    NSURL *documentDirectoryUrl = [NSFileManager.defaultManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
+    NSLog(@"Document directory URL: %@", documentDirectoryUrl);
+    
+    NSError *readError = nil;
+    // TODO: No need to do this if filePath doesn't include "file://"
+    NSURL *fileUrl = [NSURL URLWithString:filePath];
+    NSData *archiveData = [NSData dataWithContentsOfFile:fileUrl.path options:0 error:&readError];
+    if (!archiveData) {
+        NSLog(@"Unable to read web archive file: %@", readError);
+        return;
+    }
+    // TODO: Should baseUrl be the file URL or the actual web URL?
+    [self.webView loadData:archiveData MIMEType:@"application/x-webarchive" characterEncodingName:nil baseURL:nil];
+}
+
 - (void)goForward
 {
   [_webView goForward];

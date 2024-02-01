@@ -131,6 +131,8 @@ shouldStartLoadForRequest:(NSMutableDictionary<NSString *, id> *)request
 + (void)setCustomCertificatesForHost:(nullable NSDictionary *)certificates;
 - (void)postMessage:(NSString *_Nullable)message;
 - (void)injectJavaScript:(NSString *_Nullable)script;
+- (void)createWebArchive:(NSString *)filePath;
+- (void)loadWebArchive:(NSString *)filePath;
 - (void)goForward;
 - (void)goBack;
 - (void)reload;

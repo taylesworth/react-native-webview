@@ -33,6 +33,16 @@ declare class WebView<P = {}> extends Component<WebViewProps & P> {
     injectJavaScript: (script: string) => void;
 
     /**
+     * Creates a web archive.
+     */
+    createWebArchive: (filePath: string) => void;
+
+    /**
+     * Loads a web archive.
+     */
+    loadWebArchive: (filePath: string) => void;
+
+    /**
      * Focuses on WebView redered page.
      */
     requestFocus: () => void;

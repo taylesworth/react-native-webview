@@ -20,6 +20,8 @@ type WebViewCommands =
   | 'stopLoading'
   | 'postMessage'
   | 'injectJavaScript'
+  | 'createWebArchive'
+  | 'loadWebArchive'
   | 'loadUrl'
   | 'requestFocus'
   | 'clearCache';

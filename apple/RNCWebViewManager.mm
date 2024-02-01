@@ -213,6 +213,8 @@ QUICK_RCT_EXPORT_COMMAND_METHOD(requestFocus)
 
 QUICK_RCT_EXPORT_COMMAND_METHOD_PARAMS(postMessage, message:(NSString *)message, message)
 QUICK_RCT_EXPORT_COMMAND_METHOD_PARAMS(injectJavaScript, script:(NSString *)script, script)
+QUICK_RCT_EXPORT_COMMAND_METHOD_PARAMS(createWebArchive, filePath:(NSString *)filePath, filePath)
+QUICK_RCT_EXPORT_COMMAND_METHOD_PARAMS(loadWebArchive, filePath:(NSString *)filePath, filePath)
 QUICK_RCT_EXPORT_COMMAND_METHOD_PARAMS(clearCache, includeDiskFiles:(BOOL)includeDiskFiles, includeDiskFiles)
 
 RCT_EXPORT_METHOD(shouldStartLoadWithLockIdentifier:(BOOL)shouldStart

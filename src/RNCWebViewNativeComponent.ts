@@ -262,6 +262,8 @@ export interface NativeCommands {
   reload: (viewRef: React.ElementRef<HostComponent<NativeProps>>) => void;
   stopLoading: (viewRef: React.ElementRef<HostComponent<NativeProps>>) => void;
   injectJavaScript: (viewRef: React.ElementRef<HostComponent<NativeProps>>, javascript: string) => void;
+  createWebArchive: (viewRef: React.ElementRef<HostComponent<NativeProps>>, filePath: string) => void;
+  loadWebArchive: (viewRef: React.ElementRef<HostComponent<NativeProps>>, filePath: string) => void;
   requestFocus: (viewRef: React.ElementRef<HostComponent<NativeProps>>) => void;
   postMessage: (viewRef: React.ElementRef<HostComponent<NativeProps>>, data: string) => void;
   // Android Only
@@ -273,7 +275,7 @@ export interface NativeCommands {
 }
 
 export const Commands = codegenNativeCommands<NativeCommands>({
-  supportedCommands: ['goBack', 'goForward', 'reload', 'stopLoading', 'injectJavaScript', 'requestFocus', 'postMessage', 'loadUrl', 'clearFormData', 'clearCache', 'clearHistory'],
+  supportedCommands: ['goBack', 'goForward', 'reload', 'stopLoading', 'injectJavaScript', 'createWebArchive', 'loadWebArchive', 'requestFocus', 'postMessage', 'loadUrl', 'clearFormData', 'clearCache', 'clearHistory'],
 });
 
 export default codegenNativeComponent<NativeProps>(
