@@ -777,6 +777,10 @@ RCTAutoInsetsProtocol>
 
 - (void)visitSource
 {
+    if (_onLoadingFinish) {
+      _onLoadingFinish([self baseEvent]);
+    }
+    return;
   // Check for a static html source first
   NSString *html = [RCTConvert NSString:_source[@"html"]];
   if (html) {
@@ -784,7 +788,7 @@ RCTAutoInsetsProtocol>
     if (!baseURL) {
       baseURL = [NSURL URLWithString:@"about:blank"];
     }
-    [_webView loadHTMLString:html baseURL:baseURL];
+    [_webView loadHTMLString:html baseURL:baseURL];  // TODO: This is what the CSE code hits
     return;
   }
   // Add cookie for subsequent resource requests sent by page itself, if cookie was set in headers on WebView
@@ -1304,8 +1308,8 @@ RCTAutoInsetsProtocol>
             @"hasTargetFrame": @(hasTargetFrame),
             @"lockIdentifier": @(lockIdentifier)
         }];
-        _onShouldStartLoadWithRequest(event);
-        // decisionHandler(WKNavigationActionPolicyAllow);
+        //_onShouldStartLoadWithRequest(event);
+        decisionHandler(WKNavigationActionPolicyAllow);
         return;
     }
 
@@ -1418,6 +1422,10 @@ RCTAutoInsetsProtocol>
     }];
     _onLoadingError(event);
   }
+}
+
+- (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(nonnull NSError *)error {
+    NSLog(@"Failed with error: %@", error);
 }
 
 - (void)evaluateJS:(NSString *)js
